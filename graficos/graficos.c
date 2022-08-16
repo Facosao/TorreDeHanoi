@@ -58,7 +58,7 @@ int ImprimirHUD(jogo_hanoi *jogo) {
 
   printf("\nQtd. de movimentos: %d\n", jogo->qtd_movimentos);
   printf("Tempo: %d:%02d\n\n", jogo->tempo.minutos, jogo->tempo.segundos);
-  printf("[ESC] Pausar  [Barra de espaço] Selecionar [← →] Navegar\n\n");
+  printf("[ESC] Pausar  [Barra de espaco] Selecionar [<- ->] Navegar\n\n");
   
   return 0;
 }
