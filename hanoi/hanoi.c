@@ -60,7 +60,7 @@ int LoopJogo(jogo_hanoi *jogo) {
       case PAUSA: {
         time_t pausa_aux = time(NULL);
         
-        MenuPausa(jogo, &jogo_rodando);
+        MenuPausa(&jogo_rodando);
         
         pausa_aux = time(NULL) - pausa_aux;
         pausa_total += pausa_aux;

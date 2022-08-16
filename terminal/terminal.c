@@ -15,8 +15,8 @@ void InicializarTerminal(struct termios terminal_atual) {
   tcsetattr(STDIN_FILENO, TCSANOW, &novo_terminal);
 
   // Forçar fundo preto no terminal do replit
-  printf("\e[40m"); // Fundo preto
-  printf("\e[2J"); // Limpar tela
+  printf("\033[40m"); // Fundo preto
+  printf("\033[2J"); // Limpar tela
 }
 
 void RestaurarTerminal(struct termios term_original) {

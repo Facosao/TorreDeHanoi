@@ -45,7 +45,7 @@
   };
   
   int MenuNovoJogo(void);
-  int MenuPausa(jogo_hanoi *jogo, bool *jogo_rodando);
+  int MenuPausa(bool *jogo_rodando);
   int MenuComoJogar(void);
   int MenuCreditos(void);
   int MenuVenceuJogo(jogo_hanoi *jogo);

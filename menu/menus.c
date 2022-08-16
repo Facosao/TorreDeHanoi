@@ -35,7 +35,7 @@ int MenuNovoJogo(void) {
   return 0;
 }
 
-int MenuPausa(jogo_hanoi *jogo, bool *jogo_rodando) { // STRUCT JOGO NÃO É USADO NESTA FUNÇÃO !!!!!
+int MenuPausa(bool *jogo_rodando) { // STRUCT JOGO NÃO É USADO NESTA FUNÇÃO !!!!!
 
   ConfigurarTerminalMenu();
   

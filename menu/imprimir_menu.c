@@ -4,9 +4,9 @@ void ImprimirGenerico(char **opcoes, int num_elem, int opcao_selecionada) {
 
   for (int i = 0; i < num_elem; i++) {
     if (i == opcao_selecionada) {
-      printf("\e[47m\e[30m");  // Letras pretas em fundo branco
+      printf("\033[47m\033[30m");  // Letras pretas em fundo branco
       printf("%s", opcoes[i]); // Imprimir string
-      printf("\e[37m\e[40m");  // Restaurar cores originais 
+      printf("\033[37m\033[40m");  // Restaurar cores originais 
     }                          // (Letras brancas em fundo preto)
     else {
       printf("%s", opcoes[i]);
@@ -46,8 +46,8 @@ void ImprimirTitulo(void) {
 
 void ImprimirMenuPrincipal(int opcao_selecionada) {
   
-  printf("\e[%dD", 100); // Mover para a esquerda
-  printf("\e[%dA", 8);   // Mover para cima
+  printf("\033[%dD", 100); // Mover para a esquerda
+  printf("\033[%dA", 8);   // Mover para cima
   
   char *opcoes[4];
   opcoes[0] = "                Novo  jogo                 ";
@@ -65,8 +65,8 @@ void ImprimirMenuPrincipal(int opcao_selecionada) {
 
 void ImprimirDificuldade(int opcao_selecionada) {
 
-  printf("\e[%dD", 100); // Mover o cursor para a esquerda
-  printf("\e[%dA", 8);   // Mover o cursor para cima
+  printf("\033[%dD", 100); // Mover o cursor para a esquerda
+  printf("\033[%dA", 8);   // Mover o cursor para cima
 
   printf("          Escolha uma dificuldade:         \n");
   printf("                                           \n");
@@ -110,8 +110,8 @@ void ImprimirRegraUm(void) {
   printf("                                           \n");
   printf("[ESC] Sair                    [← →] Navegar\n");
 
-  printf("\e[%dD", 100);  // Mover o cursor para a esquerda
-  printf("\e[%dA", 16);   // Mover o cursor para cima
+  printf("\033[%dD", 100);  // Mover o cursor para a esquerda
+  printf("\033[%dA", 16);   // Mover o cursor para cima
 }
 
 void ImprimirRegraDois(void) {
@@ -144,8 +144,8 @@ void ImprimirRegraDois(void) {
   printf("                                           \n");
   printf("[ESC] Sair                    [← →] Navegar\n");
 
-  printf("\e[%dD", 100);  // Mover o cursor para a esquerda
-  printf("\e[%dA", 16);   // Mover o cursor para cima
+  printf("\033[%dD", 100);  // Mover o cursor para a esquerda
+  printf("\033[%dA", 16);   // Mover o cursor para cima
 }
 
 void ImprimirRegraTres(void) {
@@ -177,13 +177,13 @@ void ImprimirRegraTres(void) {
   printf("                                           \n");
   printf("[ESC] Sair                    [← →] Navegar\n");
 
-  printf("\e[%dD", 100);  // Mover o cursor para a esquerda
-  printf("\e[%dA", 16);   // Mover o cursor para cima
+  printf("\033[%dD", 100);  // Mover o cursor para a esquerda
+  printf("\033[%dA", 16);   // Mover o cursor para cima
 }
 
 void ImprimirCreditos(void) {
-  printf("\e[%dD", 100); // Mover o cursor para a esquerda
-  printf("\e[%dA", 8);   // Mover o cursor para cima
+  printf("\033[%dD", 100); // Mover o cursor para a esquerda
+  printf("\033[%dA", 8);   // Mover o cursor para cima
 
   printf("             Projeto Integrador            \n");
   printf("      da disciplina Estrutura de Dados     \n");
@@ -206,8 +206,8 @@ void ImprimirPausa(int opcao_selecionada) {
 
   const int NUM_ELEM = 2;
 
-  printf("\e[%dD", 100); // Mover para a esquerda
-  printf("\e[%dA", 100); // Mover para cima
+  printf("\033[%dD", 100); // Mover para a esquerda
+  printf("\033[%dA", 100); // Mover para cima
   
   // -------- Topo da caixa
   printf("╔══════PAUSA══════╗\n");
@@ -216,9 +216,9 @@ void ImprimirPausa(int opcao_selecionada) {
   for (int i = 0; i < NUM_ELEM; i++) {
     printf("║");
     if (i == opcao_selecionada) {
-      printf("\e[47m\e[30m");  // Letras pretas em fundo branco
+      printf("\033[47m\033[30m");  // Letras pretas em fundo branco
       printf("%s", opcoes[i]); // Imprimir string
-      printf("\e[37m\e[40m");  // Restaurar cores originais 
+      printf("\033[37m\033[40m");  // Restaurar cores originais 
     }                          // (Letras brancas em fundo preto)
     else {
       printf("%s", opcoes[i]);
@@ -236,9 +236,9 @@ void ImprimirVenceuJogo(int pontos) {
   printf("║                               ║\n");
   printf("║ Pontuação final: %04d pontos  ║\n", pontos);
   printf("║                               ║\n║");
-  printf("\e[47m\e[30m");    // Letras pretas em fundo branco
+  printf("\033[47m\033[30m");    // Letras pretas em fundo branco
   printf("           Continuar           ");
-  printf("\e[37m\e[40m║\n"); // Letras brancas em fundo preto 
+  printf("\033[37m\033[40m║\n"); // Letras brancas em fundo preto 
   printf("║                               ║\n");
   printf("║        [↵] Selecionar         ║\n");
   printf("╚═══════════════════════════════╝\n");
