@@ -1,0 +1,1 @@
+cloc /home/runner/TorreDeHanoiMP/ --exclude-dir=.ccls-cache
