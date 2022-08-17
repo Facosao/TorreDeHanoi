@@ -88,7 +88,7 @@ void ImprimirRegraUm(void) {
   printf("da primeira torre para a ultima torre.     \n");
   printf("                                           \n");
   printf("          |=======================|        \n");
-  printf("          ↑                       ↓        \n");
+  printf("          |                       v        \n");
   printf("                                           \n");
   
   for (int i = 0; i <= 5; ++i) {
@@ -102,7 +102,7 @@ void ImprimirRegraUm(void) {
   }
 
   printf("                                           \n");
-  printf("                (Página 1/3) →             \n");
+  printf("                (Pagina 1/3) ->            \n");
   printf("                                           \n");
   printf("[ESC] Sair                  [Setas] Navegar\n");
 
@@ -169,7 +169,7 @@ void ImprimirRegraTres(void) {
   }
 
   printf("                                           \n");
-  printf("             <- (Página 3/3)               \n");
+  printf("             <- (Pagina 3/3)               \n");
   printf("                                           \n");
   printf("[ESC] Sair                  [Setas] Navegar\n");
 
@@ -234,7 +234,7 @@ void ImprimirVenceuJogo(int pontos) {
   printf("|                               |\n|");
   printf("\033[47m\033[30m");    // Letras pretas em fundo branco
   printf("           Continuar           ");
-  printf("\033[37m\033[40m║\n"); // Letras brancas em fundo preto 
+  printf("\033[37m\033[40m|\n"); // Letras brancas em fundo preto 
   printf("|                               |\n");
   printf("|      [Enter]  Selecionar      |\n");
   printf("|===============================|\n");

@@ -1,5 +1,5 @@
 CC = clang
-override CFLAGS += -g -Wall -Wextra
+override CFLAGS += -Wall -Wextra
 
 SRCS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.c' -print)
 OBJS = $(patsubst %.c, %.o, $(SRCS))

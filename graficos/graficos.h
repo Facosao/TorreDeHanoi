@@ -12,14 +12,13 @@
   };
 
   enum CoresFundo {
+       Preto =  40,
     Vermelho =  41,
-     Laranja =  43,
-     Amarelo = 103,
        Verde =  42,
+     Laranja =  43,
         Azul =  44,
       Indigo =  45,
-     Violeta = 106,
-       Preto =  40,
+       Ciano =  46,
       Branco =  47
   };
   

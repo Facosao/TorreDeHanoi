@@ -119,11 +119,11 @@ void EscolherCor(int disco) {
     return;
   }
     
-  const int cores[7] = { Violeta,  Indigo, Azul, Verde,
-                         Amarelo, Laranja, Vermelho};
+  const int cores[6] = { Ciano,  Indigo, Azul, Verde,
+                         Laranja, Vermelho};
 
   disco -= 1;
-  disco %= 7;
+  disco %= 6;
   
   printf("\033[%dm", cores[disco]);
 }
