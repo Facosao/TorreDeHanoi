@@ -15,12 +15,11 @@
     OPCAO_INICIAL_PADRAO =  0,
   
     // MenuPrincipal
-    NUM_ELEM_MENU_PRINCIPAL = 3,
+    NUM_ELEM_MENU_PRINCIPAL = 2,
 
     NOVO_JOGO     = 0,
-    COMO_JOGAR    = 1,
-    CREDITOS      = 2,
-    SAIR          = 3,
+    CREDITOS      = 1,
+    SAIR          = 2,
   
     // MenuNovoJogo
     NUM_ELEM_MENU_NOVOJOGO = 3,
@@ -45,8 +44,7 @@
   };
   
   int MenuNovoJogo(void);
-  int MenuPausa(bool *jogo_rodando);
-  int MenuComoJogar(void);
+  int MenuPausa(jogo_hanoi *jogo, bool *jogo_rodando);
   int MenuCreditos(void);
   int MenuVenceuJogo(jogo_hanoi *jogo);
 

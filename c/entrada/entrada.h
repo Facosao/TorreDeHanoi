@@ -1,7 +1,8 @@
-  #ifndef ENTRADA_H
+#ifndef ENTRADA_H
 #define ENTRADA_H
 
   #include <unistd.h>
+  #include "../menu/menus.h"
   
   enum Teclas {
     ESC = 27,
@@ -21,7 +22,8 @@
     int num_items;
     int opcao_atual;
   };
-  
+
+  struct config_entrada InicialziarConfig(void);
   int SelecionarOpcao(struct config_entrada *config);
 
 #endif

@@ -11,7 +11,7 @@
   } t_no;
   
   typedef struct pilha {
-    int numElem;
+    unsigned int numElem;
     t_no *topo;
   } t_pilha;
   

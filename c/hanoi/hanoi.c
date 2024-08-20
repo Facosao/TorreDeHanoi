@@ -18,7 +18,7 @@ int NovoJogo(int dificuldade) {
   for (int i = dificuldade; i > 0; i--) {
     Inserir(jogo.torres[0], i);
   }
-    
+  
   return LoopJogo(&jogo);
 }
 
@@ -60,12 +60,12 @@ int LoopJogo(jogo_hanoi *jogo) {
       case PAUSA: {
         time_t pausa_aux = time(NULL);
         
-        MenuPausa(&jogo_rodando);
+        MenuPausa(jogo, &jogo_rodando);
         
         pausa_aux = time(NULL) - pausa_aux;
         pausa_total += pausa_aux;
 
-        torre_escolhida_antigo++; // PORQUE ????? -> PARA FORÇAR O JOGO A GERAR O PŔOXIMO QUADRO -> HACK FEIO
+        torre_escolhida_antigo++;
         break;
       }
 

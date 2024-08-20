@@ -2,7 +2,7 @@
 
 void ImprimirJogo(jogo_hanoi *jogo) {
 
-  //printf("\033[40m"); // DEBUG
+  //printf("\e[40m"); // DEBUG
   system("clear"); // Limpa tela a cada frame
 
   int tamanho = jogo->tamanho;
@@ -23,38 +23,50 @@ void ImprimirJogo(jogo_hanoi *jogo) {
     int numElem = jogo->torres[i]->numElem;
 
     // Imprimir espaços vazios
-    for (int j = tamanho; j > numElem; j--) {
+    for (int i = tamanho; i > numElem; i--) {
       ImprimirDisco(0, tamanho);
-      printf("\033[%dB", 1);                    // Descer uma linha
-      printf("\033[%dD", NumeroImpar(tamanho)); // Voltar cursor para esquerda
+      printf("\e[%dB", 1);                    // Descer uma linha
+      printf("\e[%dD", NumeroImpar(tamanho)); // Voltar cursor para esquerda
     }
 
-    // Imprimir discos
-    t_no *ponteiro_aux = jogo->torres[i]->topo;
-
-    for (int j = numElem; j > 0; j--) { // Arriscado?
-      ImprimirDisco(ponteiro_aux->elemento, tamanho);
-      printf("\033[%dB", 1);                    // Descer uma linha
-      printf("\033[%dD", NumeroImpar(tamanho)); // Voltar cursor para esquerda
-      ponteiro_aux = ponteiro_aux->proximo;
+    t_pilha *pilha_atual = jogo->torres[i];
+    t_pilha *pilha_temp = CriarPilha();
+    
+    int aux_temp = Remover(pilha_atual);
+    
+    while (aux_temp != 0) {
+      ImprimirDisco(aux_temp, tamanho);
+      printf("\e[%dB", 1);                    // Descer uma linha
+      printf("\e[%dD", NumeroImpar(tamanho)); // Voltar cursor para esquerda
+      Inserir(pilha_temp, aux_temp);
+      aux_temp = Remover(pilha_atual);
     }
 
+    aux_temp = Remover(pilha_temp);
+
+    while (aux_temp != 0) {
+        Inserir(pilha_atual, aux_temp);
+        aux_temp = Remover(pilha_temp);
+    }
+
+    free(pilha_temp);
+      
     // Colocar cursor na frente do último disco inferior
-    printf("\033[%dA", 1);                    // Subir uma linha
-    printf("\033[%dC", NumeroImpar(tamanho)); // Voltar cursor para direita
+    printf("\e[%dA", 1);                    // Subir uma linha
+    printf("\e[%dC", NumeroImpar(tamanho)); // Voltar cursor para direita
 
     // Preparar para próxima iteração
-    printf("\033[%dC", 1);             // Avançar cursor para a direita
-    printf("\033[%dA", (tamanho - 1)); // Subir cursor para o topo
+    printf("\e[%dC", 1);             // Avançar cursor para a direita
+    printf("\e[%dA", (tamanho - 1)); // Subir cursor para o topo
   }
   
-  printf("\033[%dB", tamanho); // Separar torres do HUD
+  printf("\e[%dB", tamanho); // Separar torres do HUD
   printf("\n\n\n\n\n\n");
 }
 
 int ImprimirHUD(jogo_hanoi *jogo) {
-  printf("\033[%dD", 100); // Mover o cursor para a esquerda
-  printf("\033[%dA", 6);   // Mover o cursor para cima
+  printf("\e[%dD", 100); // Mover o cursor para a esquerda
+  printf("\e[%dA", 6);   // Mover o cursor para cima
 
   printf("\nQtd. de movimentos: %d\n", jogo->qtd_movimentos);
   printf("Tempo: %d:%02d\n\n", jogo->tempo.minutos, jogo->tempo.segundos);
@@ -111,11 +123,11 @@ void ImprimirDisco(int disco, int tamanho) {
 void EscolherCor(int disco) {
 
   if (disco == (-2)) {
-    printf("\033[%dm", Preto);
+    printf("\e[%dm", Preto);
     return;
   }
   if (disco == (-1)) {
-    printf("\033[%dm", Branco);
+    printf("\e[%dm", Branco);
     return;
   }
     
@@ -125,5 +137,5 @@ void EscolherCor(int disco) {
   disco -= 1;
   disco %= 7;
   
-  printf("\033[%dm", cores[disco]);
+  printf("\e[%dm", cores[disco]);
 }

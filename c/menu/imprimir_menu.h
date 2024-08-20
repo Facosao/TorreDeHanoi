@@ -2,9 +2,10 @@
 #define IMPRIMIR_MENU_H
 
   #include <stdio.h>
+  #include <string.h>
   #include "../graficos/graficos.h"
   
-  void ImprimirGenerico(char **opcoes, int num_elem, int opcao_selecionada);
+  void ImprimirGenerico(char **opcoes, char **window_bars, int num_elem, int opcao_selecionada);
 
   void ImprimirTitulo(void);
   void ImprimirMenuPrincipal(int opcao_selecionada);
