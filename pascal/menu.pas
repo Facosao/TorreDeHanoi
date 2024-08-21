@@ -3,13 +3,10 @@ unit menu;
 interface
 
 uses
+	hanoi,
 	entrada;
 
 const
-	APERTOU_ESC = -2;
-	APERTOU_SETA = -1;
-	OPCAO_INICIAL_PADRAO = 0;
-
 	// General
 	PREVIOUS_MENU = 0;
 
@@ -29,13 +26,6 @@ const
 
     CONTINUAR_JOGO = 0;
     SAIR_JOGO  = 1;
-
-    // MenuComoJogar
-    NUM_ELEM_MENU_COMOJOGAR = 2;
-
-    PAGINA_UM   = 0;
-    PAGINA_DOIS = 1;
-    PAGINA_TRES = 2;
 
 procedure mainMenu();
 procedure newGame();
@@ -64,7 +54,7 @@ begin
 		case input of
 			NOVO_JOGO: newGame();
 			CREDITOS: menuCreditos();
-			SAIR, APERTOU_ESC: break;
+			SAIR: break;
 			else
 				continue;
 		end;
@@ -96,25 +86,25 @@ begin
 
 			VERY_EASY:
 			begin
-				//newGame := 3; // newGame(3)
+				hanoi.newGame(3);
 				exit;
 			end;
 
 			EASY:
 			begin
-				//newGame := 4; //newGame(4)
+				hanoi.newGame(4);
 				exit;
 			end;
 
 			MEDIUM:
 			begin
-				//newGame := 5; //newGame(5)
+				hanoi.newGame(5);
 				exit;
 			end;
 
 			HARD:
 			begin
-				//newGame := 7; //newGame(7)
+				hanoi.newGame(7);
 				exit;
 			end;
 
@@ -166,7 +156,7 @@ begin
 	// ImprimirCreditos();
 
 	while true do
-		if selecionarOpcao(config) = APERTOU_ESC then
+		if selecionarOpcao(config) = PREVIOUS_MENU then
 			exit(0);
 
 	menuCreditos := 0;

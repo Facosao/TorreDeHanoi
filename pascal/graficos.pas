@@ -1,14 +1,27 @@
-program graficos;
+unit graficos;
+
+interface
+
+uses 
+    hanoiRecord,
+    stack;
+
+function numeroImpar(n: integer): integer;
+procedure escolherCor(disco: integer);
+procedure imprimirDisco(disco, tamanho: integer);
+procedure printGame(game: PHanoi);
+
+implementation
 
 const
-    PRETO = 40;
+    PRETO    = 40;
     VERMELHO = 41;
-    VERDE = 42;
-    LARANJA = 43;
-    AZUL = 44;
-    MAGENTA = 45;
-    CIANO = 46;
-    BRANCO = 47;
+    VERDE    = 42;
+    LARANJA  = 43;
+    AZUL     = 44;
+    MAGENTA  = 45;
+    CIANO    = 46;
+    BRANCO   = 47;
 
 function numeroImpar(n: integer): integer;
 begin
@@ -84,15 +97,88 @@ begin
     end;
 end;
 
+procedure cursorUp(n: integer);
+begin
+    write(#27'[', n, 'A');
+end;
+
+procedure cursorDown(n: integer);
+begin
+    write(#27'[', n, 'B');
+end;
+
+procedure cursorRight(n: integer);
+begin
+    write(#27'[', n, 'C');
+end;
+
+procedure cursorLeft(n: integer);
+begin
+    write(#27'[', n, 'D');
+end;
+
+procedure printGame(game: PHanoi);
+
 var
-    teste: array[0..5] of integer = (1, 2, 3, 4, 5, 6);
-    i: integer;
-    c1, c2, c3: char;
+    size, numDisc: integer; 
+    i, j: integer;
+    auxNode: ^TNode;
 
 begin
-    for i := 0 to 5 do
+    write(#27'[2J'#27'[H'); // Clear screen
+    size := game^.size;
+    
+    for i := 0 to 2 do
     begin
-        imprimirDisco(teste[i], 6);
-        write(#10);
+        numDisc := game^.towers[i].size;
+
+        // Print blank disc spaces on the tower
+        for j := size downto numDisc + 1 do
+        begin
+            imprimirDisco(0, size);
+            cursorDown(1);
+            cursorLeft(numeroImpar(size));
+        end;
+
+        //write('1');
+
+        // Print discs
+        auxNode := game^.towers[i].top;
+        //write('2');
+
+        while auxNode <> nil do
+        begin
+            //write('i = ', i);
+            //write('element = ', game^.towers[0].top^.element);
+            imprimirDisco(auxNode^.element, size);
+            //write('3');
+            cursorDown(1);
+            cursorLeft(numeroImpar(size));
+            auxNode := auxNode^.next;
+            //write('4');
+        end;
+
+        // Undo last cursor movement
+        cursorUp(1);
+        cursorRight(numeroImpar(size));
+
+        // Prepare for next tower
+        cursorRight(1);
+        cursorUp(size - 1);
     end;
+
+    write(#10);
+end;
+
+//var
+//    teste: array[0..5] of integer = (1, 2, 3, 4, 5, 6);
+//    i: integer;
+//    c1, c2, c3: char;
+//
+//begin
+//    for i := 0 to 5 do
+//    begin
+//        imprimirDisco(teste[i], 6);
+//        write(#10);
+//    end;
 end.
