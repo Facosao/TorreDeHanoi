@@ -33,7 +33,6 @@ procedure newGame(difficulty: integer);
 var
     game: THanoi;
     i: integer;
-    auxNode: ^TNode;
 
 begin
     game.size := difficulty;
@@ -43,14 +42,6 @@ begin
 
     for i := difficulty downto 1 do
         stack.push(@game.towers[TOWER_A], i);
-
-    auxNode := game.towers[TOWER_A].top;
-
-    while auxNode <> nil do
-    begin
-        writeLn('node = ', auxNode^.element);
-        auxNode := auxNode^.next;
-    end;        
 
     gameLoop(@game);
 end;
@@ -77,16 +68,12 @@ var
     auxStack: TStack;
 
 begin
-    // write('element = ', game^.towers[0].top^.element);
     printGame(game);
 
     while gameRunning do
     begin
-        // ----- Input -----
+        // Input and logic
         read(input);
-
-        // ----- Logic -----
-
         case input of
             AB, AC, BA, BC, CA, CB:
             begin
@@ -103,18 +90,18 @@ begin
                 end;
             end;
 
-            QUIT: write(' ');
+            QUIT:
+                gameRunning := false;
         end;
         
         // ----- Graphics -----
-
-        printGame(@game);
+        printGame(game);
 
         // ----- Victory? -----
-
         if game^.towers[TOWER_C].size = game^.size then
         begin
-            //printGameWon();
+            write(#10'Congratulations! Type any number to return to the main menu. ');
+            read(i);
             gameRunning := false;
         end;
     end;

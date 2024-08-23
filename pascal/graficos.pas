@@ -10,6 +10,7 @@ function numeroImpar(n: integer): integer;
 procedure escolherCor(disco: integer);
 procedure imprimirDisco(disco, tamanho: integer);
 procedure printGame(game: PHanoi);
+procedure printHUD(size: integer);
 
 implementation
 
@@ -140,22 +141,15 @@ begin
             cursorLeft(numeroImpar(size));
         end;
 
-        //write('1');
-
         // Print discs
         auxNode := game^.towers[i].top;
-        //write('2');
 
         while auxNode <> nil do
         begin
-            //write('i = ', i);
-            //write('element = ', game^.towers[0].top^.element);
             imprimirDisco(auxNode^.element, size);
-            //write('3');
             cursorDown(1);
             cursorLeft(numeroImpar(size));
             auxNode := auxNode^.next;
-            //write('4');
         end;
 
         // Undo last cursor movement
@@ -167,18 +161,41 @@ begin
         cursorUp(size - 1);
     end;
 
-    write(#10);
+    cursorDown(size);
+    cursorLeft(100);
+    printHUD(size);
 end;
 
-//var
-//    teste: array[0..5] of integer = (1, 2, 3, 4, 5, 6);
-//    i: integer;
-//    c1, c2, c3: char;
-//
-//begin
-//    for i := 0 to 5 do
-//    begin
-//        imprimirDisco(teste[i], 6);
-//        write(#10);
-//    end;
+procedure printHUD(size: integer);
+
+var
+    largestDisc, center: integer;
+    i, j, towerCounter: integer;
+
+begin
+    largestDisc := numeroImpar(size);
+    center := (largestDisc - 1) div 2;
+    towerCounter := 1;
+
+    for i := 0 to 2 do
+    begin
+        for j := 0 to largestDisc - 1 do
+        begin
+            if (j mod largestDisc) = center then
+            begin
+                write(towerCounter);
+                towerCounter += 1;
+            end
+            else
+                write(' ');
+        end;
+        write(' '); // Tower space
+    end;
+
+    //writeLn('Possible moves:');
+    writeLn(#10#10'12, 13, 21, 23, 31, 32 - Possible moves');
+    writeLn('0 - Back to main menu'#10);
+    write('Insert a move: ');
+end;
+
 end.

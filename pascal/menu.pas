@@ -2,9 +2,7 @@ unit menu;
 
 interface
 
-uses
-	hanoi,
-	entrada;
+uses hanoi;
 
 const
 	// General
@@ -29,9 +27,7 @@ const
 
 procedure mainMenu();
 procedure newGame();
-function pausa(var jogoRodando: boolean): integer;
-function menuCreditos(): integer;
-function venceuJogo(): integer;
+procedure menuCreditos();
 
 implementation
 
@@ -47,14 +43,14 @@ begin
 		writeLn('Tower of Hanoi - Pascal Edition'#10);
 		writeLn('1 - New game');
 		writeLn('2 - Credits');
-		writeLn('3 - Quit game'#10);
+		writeLn('0 - Quit game'#10);
 		write('Select an option: ');
 		read(input);
 
 		case input of
 			NOVO_JOGO: newGame();
 			CREDITOS: menuCreditos();
-			SAIR: break;
+			PREVIOUS_MENU: break;
 			else
 				continue;
 		end;
@@ -73,38 +69,16 @@ begin
 	while true do
 	begin
 		write(#27'[2J'#27'[H'); // Clear screen
-		writeLn('Difficulty levels:'#10);
-		writeLn('1 - Very easy');
-		writeLn('2 - Easy');
-		writeLn('3 - Medium');
-		writeLn('4 - Hard'#10);
-		writeLn('0 - Back to previous menu'#10);
+		writeLn('Enter a number between 3 and 10 to ',
+		        'start the game with that many discs.');
+		writeln('Enter 0 to return to the previous screen.'#10);
 		write('Select an option: ');
 		read(input);
 
 		case input of
-
-			VERY_EASY:
+			3..10:
 			begin
-				hanoi.newGame(3);
-				exit;
-			end;
-
-			EASY:
-			begin
-				hanoi.newGame(4);
-				exit;
-			end;
-
-			MEDIUM:
-			begin
-				hanoi.newGame(5);
-				exit;
-			end;
-
-			HARD:
-			begin
-				hanoi.newGame(7);
+				hanoi.newGame(input);
 				exit;
 			end;
 
@@ -116,55 +90,10 @@ begin
 	end;
 end;
 
-function pausa(var jogoRodando: boolean): integer;
-
-var
-	config: ConfigEntrada;
+procedure menuCreditos();
 
 begin
-	// ConfigurarTerminalMenu()
-
-	config := InicializarConfig();
-	config.numItems := NUM_ELEM_MENU_PAUSA;
-
-	while true do
-	begin
-		//imprimirPausa(config.opcaoAtual);
-
-		case selecionarOpcao(config) of
-			// APERTOU_ESC, CONTINUAR_JOGO:
-			
-			SAIR_JOGO:
-			begin
-				jogoRodando := false;
-				exit;
-			end;
-		end;
-	end;
-
-	pausa := 0;
-end;
-
-function menuCreditos(): integer;
-
-var
-	config: ConfigEntrada;
-
-begin
-	config := InicializarConfig();
-
-	// ImprimirCreditos();
-
-	while true do
-		if selecionarOpcao(config) = PREVIOUS_MENU then
-			exit(0);
-
-	menuCreditos := 0;
-end;
-
-function venceuJogo(): integer;
-begin
-	venceuJogo := 0;
+	exit;
 end;
 
 end.
