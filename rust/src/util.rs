@@ -8,12 +8,8 @@ pub fn read_i32() -> i32 {
         .read_line(&mut buffer)
         .expect("Failed to read input!");
 
-    //println!("string:|{buffer}|");
-
     number = buffer.trim_end().parse::<i32>()
         .expect("Input is not an integer!");
-    
-    //println!("number:|{number}|");
 
     return number;
 }

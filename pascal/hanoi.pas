@@ -46,23 +46,13 @@ begin
     gameLoop(@game);
 end;
 
-function sourceTower(move: integer): integer;
-begin
-    sourceTower := (move div 10) - 1;
-end;
-
-function destinationTower(move: integer): integer;
-begin
-    destinationTower := (move mod 10) - 1;
-end;
-
 procedure gameLoop(game: PHanoi);
 
 var
     gameRunning: boolean = true;
     temp, input: integer;
     srcTower, destTower: integer;
-    currentSrc, currentDest: integer; 
+    src, dest: integer; 
     i: integer;
     auxNode, auxNext: ^TNode;
     auxStack: TStack;
@@ -77,13 +67,13 @@ begin
         case input of
             AB, AC, BA, BC, CA, CB:
             begin
-                srcTower := sourceTower(input);
-                destTower := destinationTower(input);
+                srcTower := (input div 10) - 1;
+                destTower := (input mod 10) - 1;
 
-                currentSrc := stack.peek(@game^.towers[srcTower]);
-                currentDest := stack.peek(@game^.towers[destTower]);
+                src := stack.peek(@game^.towers[srcTower]);
+                dest := stack.peek(@game^.towers[destTower]);
 
-                if (currentSrc < currentDest) or (currentDest = 0) then
+                if (src <> 0) and ((src < dest) or (dest = 0)) then
                 begin
                     temp := stack.pop(@game^.towers[srcTower]);
                     stack.push(@game^.towers[destTower], temp);

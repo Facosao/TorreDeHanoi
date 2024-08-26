@@ -9,7 +9,7 @@ const ORANGE: i32 = 43;
 const BLUE: i32 = 44;
 const MAGENTA: i32 = 45;
 const CYAN: i32 = 46;
-const WHITE: i32 = 46;
+const WHITE: i32 = 47;
 
 fn odd_number(n: i32) -> i32 {
     2 * n + 1
@@ -35,6 +35,8 @@ fn select_color(mut disc: i32) {
 }
 
 pub fn print_disc(disc: i32, size: i32) {
+    //myprint!("disc:{}", disc);
+
     if disc == 0 {
         let largest_disc: i32 = odd_number(size);
         let center: i32 = (largest_disc - 1) / 2;
@@ -100,28 +102,38 @@ pub fn print_game(game: &mut Hanoi) {
         let discs = game.towers[i].size;
 
         // Print blank disc spaces on the tower
-        for _ in size..discs {
+        for _ in ((discs + 1)..=size).rev() {
             print_disc(0, size);
             cursor_down(1);
             cursor_left(odd_number(size));
         }
 
+        //for j in 1..=3 {
+        //    print_disc(j, size);
+        //    cursor_down(1);
+        //    cursor_left(odd_number(size));
+        //}
+
+        //println!("disc:{}", 15);
+
         // Print discs
         // Pop items into auxiliary stack to traverse through it
         let mut aux_stack = Stack::new();
         let mut aux_value = game.towers[i].pop();
+        //println!("aux_value:{}", aux_value);
 
         while aux_value != 0 {
             print_disc(aux_value, size);
             cursor_down(1);
             cursor_left(odd_number(size));
+            //println!("aux_value:{}", aux_value);
             aux_stack.push(aux_value);
             aux_value = game.towers[i].pop();
         }
-
+        
         // Give the items back
         aux_value = aux_stack.pop();
-
+        
         while aux_value != 0 {
             game.towers[i].push(aux_value);
             aux_value = aux_stack.pop();
@@ -134,6 +146,8 @@ pub fn print_game(game: &mut Hanoi) {
         // Prepare for next tower
         cursor_right(1);
         cursor_up(size - 1);
+
+        //read_i32();
     }
 
     // Print HUD
@@ -160,7 +174,7 @@ fn print_hud(size: i32) {
         myprint!(" "); // Tower space
     }
 
-    println!("\n\n12, 13, 21, 23, 31, 32 - Possible moves");
-    println!("0 - Start a new game");
-    myprint!("Insert a move: ");
+    println!("\n\nPossible moves: 12, 13, 21, 23, 31 and 32.");
+    println!("Insert 0 to start a new game.");
+    myprint!("\nInsert a move: ");
 }

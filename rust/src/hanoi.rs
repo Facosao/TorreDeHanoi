@@ -1,3 +1,4 @@
+use crate::myprint;
 use crate::stack::Stack;
 use crate::util::read_i32;
 use crate::graphics::print_game;
@@ -30,36 +31,28 @@ pub fn new_game(difficulty: i32) {
         ]
     };
 
-    for i in difficulty..0 {
+    for i in (1..=difficulty).rev() {
         game.towers[TOWER_A].push(i);
     }
 
     game_loop(game);
 }
 
-fn source_tower(value: i32) -> usize {
-    ((value / 10) -1) as usize
-}
-
-fn destination_tower(value: i32) -> usize {
-    ((value % 10) - 1) as usize
-}
-
 fn game_loop(mut game: Hanoi) {
     let mut game_running: bool = true;
     print_game(&mut game);
-    read_i32();
+    //read_i32();
     while game_running {
         let input = read_i32();
         match input {
             AB | AC | BA | BC | CA | CB => {
-                let src_tower = source_tower(input);
-                let dest_tower = destination_tower(input);
+                let src_tower = ((input / 10) -1) as usize;
+                let dest_tower = ((input % 10) - 1) as usize;
 
-                let current_src = game.towers[src_tower].peek();
-                let current_dest = game.towers[dest_tower].peek();
+                let src = game.towers[src_tower].peek();
+                let dest = game.towers[dest_tower].peek();
 
-                if (current_src < current_dest) || (current_dest == 0) {
+                if (src != 0) && ((src < dest) || (dest == 0)) {
                     let temp = game.towers[src_tower].pop();
                     game.towers[dest_tower].push(temp);
                 }
@@ -76,7 +69,7 @@ fn game_loop(mut game: Hanoi) {
         print_game(&mut game);
 
         if game.towers[TOWER_C].size == game.size {
-            print!("\nCongratulations! Type any number to return to the main menu. ");
+            myprint!("\nCongratulations! Insert any number to start a new game. ");
             read_i32();
             game_running = false;
         }
