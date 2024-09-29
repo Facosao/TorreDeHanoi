@@ -1,5 +1,6 @@
 *.o
 *.ppu
 *.exe
+*.beam
 tower
 rust/target
