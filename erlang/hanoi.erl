@@ -12,7 +12,7 @@
 
 new_game(Difficulty) ->
     TowerA = lists:seq(1, Difficulty),
-    % print_game(Size, NewTA, NewTB, NewTB),
+    graphics:print_game(Difficulty, TowerA, [], []),
     play(Difficulty, TowerA, [], []).
 
 
@@ -42,28 +42,28 @@ play(Size, TowerA, TowerB, TowerC) ->
         _ ->
             {TowerA, TowerB, TowerC, false}
     end,
-    % print_game(Size, NewTA, NewTB, NewTB),
+    graphics:print_game(Size, NewTA, NewTB, NewTC),
     Victory = has_won(Size, TowerC),
-    if
-        Victory or Quit -> ok;
-        true -> play(Size, NewTA, NewTB, NewTC)
+    case Victory or Quit of
+        true -> ok;
+        false -> play(Size, NewTA, NewTB, NewTC)
     end.
 
 
 move_disc([], Dest) -> {[], Dest};
 move_disc([SH|ST], []) -> {ST, [SH]};
 move_disc([SH|ST] = Src, [DH|_] = Dest) -> 
-    if
-        SH < DH -> {ST, [SH | Dest]};
-        true -> {Src, Dest}
+    case SH < DH of
+        true -> {ST, [SH | Dest]};
+        false -> {Src, Dest}
     end.
 
 
 has_won(Size, Tower) ->
-    if
-        Size == length(Tower) ->
+    case Size == length(Tower) of
+        true ->
             io:format("\nCongratulations! Insert any number to start a new game. "),
             {_, _} = io:fread("", "~d"),
             true;
-        true -> false
+        false -> false
     end.

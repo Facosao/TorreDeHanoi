@@ -1,7 +1,5 @@
 -module(graphics).
--export([
-    print_disc/2
-]).
+-export([clear_screen/0, print_game/4]).
 
 -define(BLACK, 40).
 -define(WHITE, 47).
@@ -9,7 +7,7 @@
 
 odd_number(N)        -> 2 * N + 1.
 % Terminal functions 
-clear_screen()       -> io:format("\e[2J").
+clear_screen()       -> io:format("\e[2J\e[H").
 cursor_up(N)         -> io:format("\e[~wA", [N]).
 cursor_down(N)       -> io:format("\e[~wB", [N]).
 cursor_right(N)      -> io:format("\e[~wC", [N]).
@@ -76,7 +74,7 @@ print_tower_id(_, _) -> ok.
 print_hud(Size) -> 
     print_tower_id(Size, 1),
     io:format("\n\nPossible moves: 12, 13, 21, 23, 31 and 32."),
-    io:format("Insert 0 to start a new game."),
+    io:format("\nInsert 0 to start a new game."),
     io:format("\nInsert a move: ").
 
 
