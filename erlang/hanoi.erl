@@ -43,7 +43,7 @@ play(Size, TowerA, TowerB, TowerC) ->
             {TowerA, TowerB, TowerC, false}
     end,
     graphics:print_game(Size, NewTA, NewTB, NewTC),
-    Victory = has_won(Size, TowerC),
+    Victory = has_won(Size, NewTC),
     case Victory or Quit of
         true -> ok;
         false -> play(Size, NewTA, NewTB, NewTC)
