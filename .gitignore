@@ -5,3 +5,4 @@
 *.dump
 tower
 rust/target
+haskell/dist-newstyle

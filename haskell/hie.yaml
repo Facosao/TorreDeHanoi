@@ -1,0 +1,10 @@
+cradle:
+  cabal:
+    - path: "app/Main.hs"
+      component: "towerofhanoi:exe:towerofhanoi"
+
+    - path: "app/Hanoi.hs"
+      component: "towerofhanoi:exe:towerofhanoi"
+
+    - path: "app/Graphics.hs"
+      component: "towerofhanoi:exe:towerofhanoi"
